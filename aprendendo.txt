@@ -1,0 +1,60 @@
+18.
+dotnet tool list --global 
+Lista os frameworks e pacotes
+
+Para instalar dotnet ef:
+dotnet tool install --global dotnet-ef
+
+19.
+Ctrl+shift + P
+Escrever Nuget Gallery (Extensão) 
+Dentro dela é possivel ver os pacotes instalados e instalar novos pacotes como os necessarios:
+entity framework core
+entity framework core tools
+entity framework core tools design
+RefreshMicrosoft.EntityFrameworkCore.Sqlite 
+
+20.
+Caso o omnisharp não esteja funcionando, digite CTRL+SHIFT+P e depois: Restart OmniSharp
+
+
+
+Criar datacontext.cs
+Criação da tabela
+
+
+Para referenciar algo, CTRL+.
+
+Adicionar contexto ao Startup/Program.c:
+
+Acabei de criar um contexto. Falar para o service que o contexto será:
+var connectionString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddDbContext<DataContext>(
+    context => context.UseSqlite(connectionString)
+);
+
+Adicionar no AppSettings.Devel
+pment.json a string de conexão "Default":
+"ConnectionStrings": {
+    "Default":"Data Source=ProEventos.db"
+  },
+Sempre dando CTRL+. em cima dos valores para puxar a biblioteca
+No DataContext.cs:
+
+
+public DataContext(DbContextOptions<DataContext> options) : base(options){ }
+
+21.
+Altere o diretorio corrente para apontar para dentro de Back/src/ProEventos.API
+escreva:
+dotnet ef migrations add Initial -o Data/Migrations // cria o migration de acordo com o model
+Depois:
+dotnet ef database update // roda o migration
+
+
+Pode fazer para remover:
+dotnet ef migrations remove]
+
+Achar o arquivo ProEventos.db no explorer
+Arrastar o arquivo para o programa DB Browser for SQLite
+
